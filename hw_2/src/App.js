@@ -9,12 +9,15 @@ import Column from "./components/Columns/Columns";
 
 function App() {
 	const [tasks, setTasks] = useState([]);
+	console.log("useEffect 0");
 
 	useEffect(() => {
+		console.log("useEffect 1");
 		axios
 			.get("https://6675570ea8d2b4d072efa0bb.mockapi.io/tasks")
 			.then((response) => {
 				setTasks(response.data);
+				console.log("useEffect 2");
 			})
 			.catch((error) => {
 				console.error("Error fetching data: ", error);
