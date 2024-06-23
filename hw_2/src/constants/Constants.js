@@ -1,5 +1,5 @@
-const TO_DO = "To Do";
-const IN_PROGRESS = "In Progress";
-const DONE = "Done";
+const STATUS_TO_DO = "To Do";
+const STATUS_IN_PROGRESS = "In Progress";
+const STATUS_DONE = "Done";
 
-export { TO_DO, IN_PROGRESS, DONE };
+export { STATUS_TO_DO, STATUS_IN_PROGRESS, STATUS_DONE };
