@@ -2,8 +2,6 @@ import React from "react";
 import Task from "../Tasks/Tasks";
 
 const Column = ({ title, tasks, changeStatus, deleteTask }) => {
-	console.log(`Rendering Column: ${title}`);
-
 	return (
 		<div className="column">
 			<h2>{title}</h2>
