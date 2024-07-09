@@ -3,16 +3,16 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 
-import UserList from "./components/List/List";
-import UserDetail from "./components/User/User";
+import List from "./components/List/List";
+import User from "./components/User/User";
 
 function App() {
 	return (
 		<Router>
 			<div className="App">
 				<Routes>
-					<Route path="/" element={<UserList />} />
-					<Route path="/user/:id" element={<UserDetail />} />
+					<Route path="/" element={<List />} />
+					<Route path="/user/:id" element={<User />} />
 				</Routes>
 			</div>
 		</Router>

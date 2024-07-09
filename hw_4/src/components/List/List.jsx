@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { fetchUserData } from "../services/services";
 
-const UserList = () => {
+const List = () => {
 	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
@@ -31,4 +31,4 @@ const UserList = () => {
 	);
 };
 
-export default UserList;
+export default List;
