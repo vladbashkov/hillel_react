@@ -1,0 +1,40 @@
+.Columns {
+	margin: 16px;
+	display: flex;
+	justify-content: center;
+}
+
+.task-board {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.column {
+	padding: 10px;
+	border: 1px solid #000;
+	border-radius: 4px;
+
+	h2 {
+		margin-top: 0;
+	}
+}
+
+.task {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	margin-bottom: 7px;
+
+	span {
+		margin: 0 auto 0 0;
+	}
+
+	button {
+		flex-shrink: 0;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
