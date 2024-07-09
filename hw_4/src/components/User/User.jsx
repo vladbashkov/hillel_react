@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { fetchUserData } from "../services/services";
 
-function UserDetail() {
+const UserDetail = () => {
 	const { id } = useParams();
 	const [user, setUser] = useState(null);
 
@@ -62,6 +62,6 @@ function UserDetail() {
 			)}
 		</div>
 	);
-}
+};
 
 export default UserDetail;
