@@ -1,7 +1,7 @@
 import "./listItem.css";
 
 const ListItem = (props) => {
-	console.log(props);
+	// console.log(props);
 
 	const { name, salary, onDelete, onToggleProps, onChangeSalary, increase, rise } = props;
 
@@ -25,7 +25,7 @@ const ListItem = (props) => {
 			<input
 				type="text" //
 				className="list-group-item-input"
-				defaultValue={salary + "$"}
+				defaultValue={Math.round(salary) + "$"}
 				onChange={(e) => onChangeSalary(name, parseInt(e.currentTarget.value))}
 			/>
 			<div className="d-flex justify-content-center align-items-center">

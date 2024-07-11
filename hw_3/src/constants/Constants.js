@@ -20,3 +20,8 @@ export const AddFormConst = {
 	PricePlaceholder: "З/П?",
 	AddButtonForm: "Додати",
 };
+
+export const FilterConst = {
+	rise: "rise",
+	moreThen1000: "moreThen1000",
+};

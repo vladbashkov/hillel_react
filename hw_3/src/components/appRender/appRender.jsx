@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { mockData } from "../../data/mockData";
+import service from "../../services/services";
 import "./appRender.css";
+import { FilterConst } from "../../constants/Constants";
+
 import AppInfo from "../appInfo/appInfo";
 import SearchPanel from "../searchPanel/searchPanel";
 import AppFilter from "../appFilter/appFilter";
@@ -9,13 +11,30 @@ import List from "../List/List";
 import AddForm from "../addForm/addForm";
 
 const AppRender = () => {
-	const [data, setData] = useState(mockData);
+	const [data, setData] = useState([]);
 	const [term, setTerm] = useState("");
 	const [filter, setFilter] = useState("all");
-	let maxID = mockData.length + 1;
+
+	useEffect(() => {
+		service
+			.get()
+			.then((data) => {
+				setData(data);
+			})
+			.catch((error) => {
+				console.error("Error fetching data: ", error);
+			});
+	}, []);
 
 	const deleteItem = (id) => {
-		setData(data.filter((item) => item.id !== id));
+		service
+			.delete(id)
+			.then(() => {
+				setData(data.filter((item) => item.id !== id));
+			})
+			.catch((error) => {
+				console.error("Error deleting item: ", error);
+			});
 	};
 
 	const addItem = (name, salary) => {
@@ -24,31 +43,59 @@ const AppRender = () => {
 			salary,
 			increase: false,
 			rise: false,
-			id: maxID++,
 		};
-		setData([...data, newItem]);
+		service
+			.post(newItem)
+			.then((newData) => {
+				setData([...data, newData]);
+			})
+			.catch((error) => {
+				console.error("Error adding item: ", error);
+			});
 	};
 
 	const onToggleProps = (id, props) => {
-		setData(
-			data.map((item) => {
-				if (item.id === id) {
-					return { ...item, [props]: !item[props] };
-				}
-				return item;
+		const itemToUpdate = data.find((item) => item.id === id);
+		const updatedItem = { ...itemToUpdate, [props]: !itemToUpdate[props] };
+
+		service
+			.put(id, updatedItem)
+			.then(() => {
+				setData(
+					data.map((item) => {
+						if (item.id === id) {
+							return updatedItem;
+						}
+						return item;
+					})
+				);
 			})
-		);
+			.catch((error) => {
+				console.error("Error toggling item property: ", error);
+			});
 	};
 
 	const onChangeSalary = (name, newSalary) => {
-		setData(
-			data.map((item) => {
-				if (item.name === name && newSalary > 0) {
-					return { ...item, salary: newSalary };
-				}
-				return item;
-			})
-		);
+		const itemToUpdate = data.find((item) => item.name === name);
+		if (itemToUpdate && newSalary > 0) {
+			const updatedItem = { ...itemToUpdate, salary: newSalary };
+
+			service
+				.put(itemToUpdate.id, updatedItem)
+				.then(() => {
+					setData(
+						data.map((item) => {
+							if (item.name === name) {
+								return updatedItem;
+							}
+							return item;
+						})
+					);
+				})
+				.catch((error) => {
+					console.error("Error changing salary: ", error);
+				});
+		}
 	};
 
 	const searchEmp = (items, term) => {
@@ -62,9 +109,9 @@ const AppRender = () => {
 
 	const filterPost = (items, filter) => {
 		switch (filter) {
-			case "rise":
+			case FilterConst.rise:
 				return items.filter((item) => item.rise);
-			case "moreThen1000":
+			case FilterConst.moreThen1000:
 				return items.filter((item) => item.salary >= 1000);
 			default:
 				return items;
