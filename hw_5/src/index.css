@@ -208,6 +208,12 @@ body {
 	color: rgb(234 179 8);
 }
 
+.buttons-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
 button {
 	font-family: Roboto Mono, monospace;
 	border: 0;
@@ -221,6 +227,11 @@ button {
 
 button:hover {
 	background-color: rgb(254, 189, 8);
+}
+
+button.single {
+	opacity: 0.5;
+	cursor: default;
 }
 
 input {
