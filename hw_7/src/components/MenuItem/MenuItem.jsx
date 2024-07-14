@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import Button from "../Button/Button";
+import { Soldout } from "../../constants/Constants";
 
 const MenuItem = ({ item }) => {
 	const [quantity, setQuantity] = useState(0);
@@ -36,7 +38,7 @@ const MenuItem = ({ item }) => {
 					))}
 				</p>
 				<div className="pizza__actions">
-					<p className="pizza__price">€{item.unitPrice}</p>
+					<p className="pizza__price">{item.soldOut ? Soldout : `€${item.unitPrice}.00`}</p>
 					{!item.soldOut && (
 						<>
 							{quantity === 0 ? (
