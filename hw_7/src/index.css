@@ -234,6 +234,10 @@ button.single {
 	cursor: default;
 }
 
+button.single:hover {
+	background-color: rgb(234, 179, 8);
+}
+
 input {
 	padding: 10px 15px;
 	border-radius: 4px;
