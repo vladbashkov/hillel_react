@@ -6,37 +6,22 @@ import { Soldout } from "../../constants/Constants";
 const MenuItem = ({ item }) => {
 	const [quantity, setQuantity] = useState(0);
 
-	const handleAddToCart = () => {
-		setQuantity(1);
-	};
+	const handleAddToCart = () => setQuantity(1);
 
-	const handleIncrement = () => {
-		setQuantity(quantity + 1);
-	};
+	const handleIncrement = () => setQuantity((prevQuantity) => prevQuantity + 1);
 
 	const handleDecrement = () => {
-		if (quantity > 1) {
-			setQuantity(quantity - 1);
-		}
+		if (quantity > 1) setQuantity((prevQuantity) => prevQuantity - 1);
 	};
 
-	const handleDelete = () => {
-		setQuantity(0);
-	};
+	const handleDelete = () => setQuantity(0);
 
 	return (
 		<li className={`pizza ${item.soldOut ? "soldout" : ""}`} id={item.id}>
 			<img src={item.imageUrl} className="pizza__image" alt={item.name} />
 			<div className="pizza__info">
 				<p className="pizza__name">{item.name}</p>
-				<p className="pizza__ingredients">
-					{item.ingredients.map((ing, index) => (
-						<span key={index}>
-							{ing}
-							{index < item.ingredients.length - 1 && ", "}
-						</span>
-					))}
-				</p>
+				<p className="pizza__ingredients">{item.ingredients.join(", ")}</p>
 				<div className="pizza__actions">
 					<p className="pizza__price">{item.soldOut ? Soldout : `€${item.unitPrice}.00`}</p>
 					{!item.soldOut && (
